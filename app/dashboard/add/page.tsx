@@ -1,17 +1,42 @@
 'use client'
 import React from 'react'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Radio, Space } from 'antd'
+import { Button, Form, Input, Radio } from 'antd'
+import axios from 'axios'
+import { useProfileStore } from '@/lib/hooks/store'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 export default function AddQuiz () {
-  const onFinish = (values: any) => {
-    console.log('Received values of form:', values)
+  const { profile } = useProfileStore()
+  const router = useRouter();
+  const onFinish = async (values: any) => {
+    const id = toast.loading('Please wait...')
+    try {
+      const res = await axios.post('/api/quiz', {
+        ...values,
+        userid: profile?.id
+      })
+      toast.update(id, {
+        render: ' You have successfully create quiz',
+        type: 'success',
+        isLoading: false,
+        autoClose: 6000
+      })
+      router.push('/dashboard')
+    } catch (error) {
+      toast.update(id, {
+        render: ' try again.',
+        type: 'error',
+        isLoading: false,
+        autoClose: 7000
+      })
+    }
   }
 
   return (
     <div className='p-4'>
       <h1 className='font-bold text-2xl'>Add a new quizz</h1>
-
       <div className='my-4'>
         <Form
           name='dynamic_form_nest_item'
@@ -47,7 +72,7 @@ export default function AddQuiz () {
                     <div>
                       <Form.Item
                         {...restField}
-                        name={[name, '1']}
+                        name={[name, 'option1']}
                         label='Option 1'
                         rules={[
                           { required: true, message: 'Missing Enter options' }
@@ -57,7 +82,7 @@ export default function AddQuiz () {
                       </Form.Item>
                       <Form.Item
                         {...restField}
-                        name={[name, '2']}
+                        name={[name, 'option2']}
                         label='Option 2'
                         rules={[
                           { required: true, message: 'Missing Enter options' }
@@ -67,7 +92,7 @@ export default function AddQuiz () {
                       </Form.Item>
                       <Form.Item
                         {...restField}
-                        name={[name, '3']}
+                        name={[name, 'option3']}
                         label='Option 3'
                         rules={[
                           { required: true, message: 'Missing Enter options' }
@@ -77,7 +102,7 @@ export default function AddQuiz () {
                       </Form.Item>
                       <Form.Item
                         {...restField}
-                        name={[name, '4']}
+                        name={[name, 'option4']}
                         label='Option 4'
                         rules={[
                           { required: true, message: 'Missing Enter options' }
@@ -94,10 +119,10 @@ export default function AddQuiz () {
                         ]}
                       >
                         <Radio.Group>
-                          <Radio.Button value='1'>Option 1</Radio.Button>
-                          <Radio.Button value='2'>Option 2</Radio.Button>
-                          <Radio.Button value='3'>Option 3</Radio.Button>
-                          <Radio.Button value='4'>Option 4</Radio.Button>
+                          <Radio.Button value='option1'>Option 1</Radio.Button>
+                          <Radio.Button value='option2'>Option 2</Radio.Button>
+                          <Radio.Button value='option3'>Option 3</Radio.Button>
+                          <Radio.Button value='option4'>Option 4</Radio.Button>
                         </Radio.Group>
                       </Form.Item>
                     </div>

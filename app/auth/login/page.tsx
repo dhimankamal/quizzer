@@ -17,12 +17,10 @@ export default function LoginPage () {
   const router = useRouter()
 
   const onFinish = async (values: any) => {
-    console.log('values', values)
     const id = toast.loading('Please wait...')
 
     try {
       const res = await axios.post('/api/auth/login', values)
-
       if (res?.data && res?.data?.token) {
         cookie.set('token', res?.data?.token, { expires: 1 })
         toast.update(id, {

@@ -19,6 +19,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Quiz      Quiz[]
+  Record    Record[]
 }
 
 model Quiz {
@@ -29,6 +30,7 @@ model Quiz {
   Questions Questions[]
   user      User        @relation(fields: [userid], references: [id])
   userid    String
+  Record    Record[]
 }
 
 model Questions {
@@ -44,4 +46,17 @@ model Questions {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   sno       Int?
+}
+
+model Record {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userid], references: [id])
+  userid    String
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  quizId    String
+  answer    Json
+  score     Int
+  total     Int
 }

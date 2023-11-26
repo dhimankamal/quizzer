@@ -1,5 +1,6 @@
 'use client'
 
+import { useProfileStore } from '@/lib/hooks/store'
 import { Questions, Record, User } from '@prisma/client'
 import { Button, Form, Radio } from 'antd'
 import axios from 'axios'
@@ -17,10 +18,12 @@ type Props = {
 export default function Questions ({ data }: Props) {
   const [record, setRecord] = useState<Record | undefined>(undefined)
 
+  const { profile } = useProfileStore()
+
   const onFinish = async (value: any) => {
     let payload = {
       quizId: data.id,
-      userid: data.user.id,
+      userid: profile?.id || '',
       score: 0,
       total: data.Questions.length,
       answer: value
@@ -42,7 +45,7 @@ export default function Questions ({ data }: Props) {
   const fetchRecord = async () => {
     try {
       const res = await axios.get(
-        `/api/record?quizid=${data.id}&userid=${data.user.id}`
+        `/api/record?quizid=${data.id}&userid=${profile?.id}`
       )
       setRecord(res.data)
     } catch (error) {
@@ -56,18 +59,18 @@ export default function Questions ({ data }: Props) {
 
   if (record?.id) {
     return (
-      <section className='border p-4 bg-green-100 font-bold'>
-        <h1 className='text-2xl '>You are done</h1>
+      <section className='border p-4 bg-green-100 '>
+        <h1 className='text-2xl font-bold'>You are done</h1>
         <p>Congrats you complete test.</p>
-        <p>
-          Your Score - <span>{record.score}</span>{' '}
+        <p className='font-bold'>
+          Your Score - <span className='font-normal'>{record.score}</span>{' '}
         </p>
-        <p>
-          Total Score - <span>{record.total}</span>{' '}
+        <p className='font-bold'>
+          Total Score - <span className='font-normal'>{record.total}</span>{' '}
         </p>
-        <p>
+        <p className='font-bold'>
           Date submitted -{' '}
-          <span>
+          <span className='font-normal'>
             {' '}
             {dayjs(record?.createdAt).format('ddd, MMM D, YYYY h:mm A')}
           </span>{' '}

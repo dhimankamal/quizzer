@@ -23,7 +23,7 @@ export default function RootLayout ({
       <body className={inter.className}>
         <div className={`min-h-screen flex flex-col`}>
           <Navbar />
-          <main className='flex-1 h-full overflow-auto py-8 container mx-auto'>{children}</main>
+          <main className='flex-1 flex flex-col h-full overflow-auto py-8 container mx-auto'>{children}</main>
           <Footer />
           <ToastContainer position="bottom-right" closeOnClick pauseOnHover />
         </div>

@@ -56,16 +56,15 @@ export default function LoginPage () {
     console.log('Failed:', errorInfo)
   }
   return (
-    <div className=''>
+    <div className='w-[400px] mx-auto'>
+      <h2 className='text-xl font-bold mb-8'>Login now</h2>
       <Form
         name='basic'
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete='off'
+        layout='vertical'
       >
         <Form.Item<FieldType>
           label='Email'
@@ -83,18 +82,23 @@ export default function LoginPage () {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item<FieldType>
-          name='remember'
-          valuePropName='checked'
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
+        <Form.Item<FieldType> name='remember' valuePropName='checked'>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type='primary' className='bg-blue-600' htmlType='submit'>
-            Submit
-          </Button>
+        <Form.Item>
+          <div className='flex gap-4'>
+            <Button type='primary' className='bg-blue-600' htmlType='submit'>
+              Login
+            </Button>
+            <Button
+              type='primary'
+              className='bg-gray-200 text-black hover:!bg-blue-600'
+              onClick={() => router.push('/auth/register')}
+            >
+              Register
+            </Button>
+          </div>
         </Form.Item>
       </Form>
     </div>

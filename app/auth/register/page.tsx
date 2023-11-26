@@ -50,12 +50,11 @@ export default function RegisterPage () {
     }
   }
   return (
-    <div>
+    <div className='w-[500px] mx-auto'>
+      <h2 className='text-xl font-bold mb-8'>Registertion</h2>
       <Form
         name='basic'
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
+        layout='vertical'
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -90,7 +89,7 @@ export default function RegisterPage () {
             <Radio.Button value='student'>Student</Radio.Button>
           </Radio.Group>
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item>
           <Button type='primary' className='bg-blue-600' htmlType='submit'>
             Register Now
           </Button>

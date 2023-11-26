@@ -12,14 +12,9 @@ const navlinks = [
     id: 'home'
   },
   {
-    name: 'About',
-    href: '/about',
-    id: 'about'
-  },
-  {
-    name: 'Contact',
-    href: '/contact',
-    id: 'contact'
+    name: 'Dasboard',
+    href: '/dashboard',
+    id: 'dasboard'
   }
 ]
 
@@ -37,7 +32,7 @@ export default function Navbar () {
             href='/'
             aria-label='Go to main page'
             onClick={() => setOpen(false)}
-            className='flex items-center text-md justify-center font-bold'
+            className='flex items-center text-3xl justify-center font-bold'
           >
             Quizzer
           </Link>

@@ -45,9 +45,29 @@ export async function GET() {
       include: {
         Questions: true,
         user: true,
+        Record: {
+          include: {
+            user: true,
+          },
+        },
       },
       orderBy: {
         updatedAt: "desc",
+      },
+    });
+    return NextResponse.json(res);
+  } catch (error) {
+    return NextResponse.json({ error: `${error}` });
+  }
+}
+
+export async function DELETE(request: Request) {
+  const { searchParams } = new URL(request.url);
+  try {
+    const id = searchParams.get("id") || "";
+    const res = await prisma.quiz.delete({
+      where: {
+        id,
       },
     });
     return NextResponse.json(res);

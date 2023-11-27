@@ -93,7 +93,7 @@ export default function Questions ({ data }: Props) {
               return (
                 <li key={id}>
                   <h2 className='text-xl font-bold'>
-                    {sno} - {name}
+                    {sno}: {name}
                   </h2>
                   <Form.Item
                     name={id}

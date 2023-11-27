@@ -34,7 +34,7 @@ export default function RegisterPage () {
         router.push('/auth/login')
       } else {
         toast.update(id, {
-          render: ' try again.',
+          render: 'try again.',
           type: 'error',
           isLoading: false,
           autoClose: 7000
@@ -42,7 +42,7 @@ export default function RegisterPage () {
       }
     } catch (error) {
       toast.update(id, {
-        render: ' try again.',
+        render: 'try again.',
         type: 'error',
         isLoading: false,
         autoClose: 7000
@@ -51,7 +51,7 @@ export default function RegisterPage () {
   }
   return (
     <div className='w-[500px] mx-auto'>
-      <h2 className='text-xl font-bold mb-8'>Registertion</h2>
+      <h2 className='text-xl font-bold mb-8'>Registration</h2>
       <Form
         name='basic'
         layout='vertical'

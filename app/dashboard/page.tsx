@@ -3,19 +3,14 @@
 import { useProfileStore } from '@/lib/hooks/store'
 import { Button } from 'antd'
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React from 'react'
 import QuizTable from './components/QuizTable'
 import cookie from 'js-cookie'
 import Student from './components/Student'
 
 export default function DashboardPage () {
   const router = useRouter()
-
   const { profile } = useProfileStore()
-
-  useEffect(() => {
-    console.log('profile', profile)
-  }, [profile])
 
   return (
     <div className='p-4'>
@@ -37,7 +32,7 @@ export default function DashboardPage () {
       {profile?.role === 'teacher' && (
         <>
           <div className='mt-6 border-b-2 pb-4 flex justify-between items-center'>
-            <h2 className='text-xl font-bold'>Created quiz</h2>
+            <h2 className='text-xl font-bold'>Created Quiz</h2>
             <Button
               onClick={() => router.push('/dashboard/add')}
               className='bg-blue-600'

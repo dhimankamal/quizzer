@@ -22,7 +22,6 @@ export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
     const token = await loginUser(email, password);
-    console.log("token", token);
     return NextResponse.json({ token });
   } catch (error) {
     console.log("error", error);

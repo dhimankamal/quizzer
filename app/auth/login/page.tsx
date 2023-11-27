@@ -39,7 +39,6 @@ export default function LoginPage () {
           autoClose: 7000
         })
       }
-      console.log('res', res)
     } catch (error) {
       toast.update(id, {
         render:
@@ -48,7 +47,6 @@ export default function LoginPage () {
         isLoading: false,
         autoClose: 7000
       })
-      console.log('error', error)
     }
   }
 
